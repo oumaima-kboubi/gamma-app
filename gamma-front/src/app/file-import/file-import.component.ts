@@ -13,7 +13,7 @@ export class FileImportComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectedFile: File | null = null;
+  /*selectedFile: File | null = null;
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -33,5 +33,35 @@ export class FileImportComponent implements OnInit {
         }
       );
     }
+  }*/
+
+  selectedFile: File | null = null;
+  uploadedFileName: string | null = null;
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.uploadedFileName = event.target.files[0].name;
+
+  }
+
+  uploadFile(): void {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      this.http.post('http://127.0.0.1:8000/upload-excel', formData).subscribe(
+        (response: any) => {
+          console.log('File uploaded successfully', response);
+          this.uploadedFileName = response.filename; // Update the uploadedFileName
+          // Redirect to another page
+          // You can use Angular's router for navigation
+        },
+        (error) => {
+          console.error('Error uploading file', error);
+        }
+      );
+    }
   }
 }
+
+

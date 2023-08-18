@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-import',
@@ -8,32 +9,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FileImportComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {
   }
-
-  /*selectedFile: File | null = null;
-
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-  }
-
-  uploadFile(): void {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
-
-      this.http.post('http://127.0.0.1:8000/upload-excel', formData).subscribe(
-        (response) => {
-          console.log('File uploaded successfully', response);
-        },
-        (error) => {
-          console.error('Error uploading file', error);
-        }
-      );
-    }
-  }*/
 
   selectedFile: File | null = null;
   uploadedFileName: string | null = null;
@@ -60,9 +39,9 @@ export class FileImportComponent implements OnInit {
       this.http.post('http://127.0.0.1:8000/upload-excel', formData).subscribe(
         (response: any) => {
           console.log('File uploaded successfully', response);
-          this.uploadedFileName = response.filename; // Update the uploadedFileName
-          // Redirect to another page
-          // You can use Angular's router for navigation
+          // Update the uploadedFileName
+          this.uploadedFileName = response.filename;
+          this.router.navigate(['/bands']);
         },
         (error) => {
           console.error('Error uploading file', error);

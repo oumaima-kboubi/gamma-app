@@ -1,0 +1,13 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+band_create:
+    path: /bands/create
+    controller: App\Controller\BandController::create
+    methods: ['POST','GET']
+xlsx:
+    path: /upload-excel
+    controller: App\Controller\SpreadsheetController::xslx
+    methods: ['POST']

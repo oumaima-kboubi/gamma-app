@@ -13,5 +13,14 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
+
+  }
+   /* Style the container to make the table scrollable */
+   .table-container {
+    max-height: 500px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
   }
 }

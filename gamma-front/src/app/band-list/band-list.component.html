@@ -1,1 +1,32 @@
-<p>band-list works!</p>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom du groupe</th>
+        <th>Origine</th>
+        <th>Ville</th>
+        <th>Année début</th>
+        <th>Année séparation</th>
+        <th>Fondateurs</th>
+        <th>Membres</th>
+        <th>Courant musical</th>
+        <th>Présenattion</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let band of bands">
+        <td>{{ band.nomGroupe }}</td>
+        <td>{{ band.origine }}</td>
+        <td>{{ band.ville }}</td>
+        <td>{{ band.anneeDebut }}</td>
+        <td>{{ band.anneeSeparation }}</td>
+        <td>{{ band.fondateurs }}</td>
+        <td>{{ band.membres }}</td>
+        <td>{{ band.courantMusical }}</td>
+        <td>{{ band.presentation }}</td>
+        <button class="edit-button" (click)="editBand(band.id)">Edit</button>
+      </tr>
+    </tbody>
+  </table>
+</div>

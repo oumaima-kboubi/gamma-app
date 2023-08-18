@@ -24,10 +24,10 @@ class Band
     private ?string $ville = null;
 
     #[ORM\Column(nullable: false)]
-    private ?float $annéeDébut = null;
+    private ?float $anneeDebut = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $annéeSéparation = null;
+    private ?float $anneeSeparation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $fondateurs = null;
@@ -39,7 +39,7 @@ class Band
     private ?string $courantMusical = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $présentation = null;
+    private ?string $presentation = null;
 
     public function getId(): ?int
     {
@@ -82,26 +82,26 @@ class Band
         return $this;
     }
 
-    public function getAnnéeDébut(): ?float
+    public function getanneeDebut(): ?float
     {
-        return $this->annéeDébut;
+        return $this->anneeDebut;
     }
 
-    public function setAnnéeDébut(float $annéeDébut): static
+    public function setanneeDebut(float $anneeDebut): static
     {
-        $this->annéeDébut = $annéeDébut;
+        $this->anneeDebut = $anneeDebut;
 
         return $this;
     }
 
-    public function getAnnéeSéparation(): ?float
+    public function getanneeSeparation(): ?float
     {
-        return $this->annéeSéparation;
+        return $this->anneeSeparation;
     }
 
-    public function setAnnéeSéparation(?float $annéeSéparation): static
+    public function setanneeSeparation(?float $anneeSeparation): static
     {
-        $this->annéeSéparation = $annéeSéparation;
+        $this->anneeSeparation = $anneeSeparation;
 
         return $this;
     }
@@ -142,14 +142,14 @@ class Band
         return $this;
     }
 
-    public function getPrésentation(): ?string
+    public function getpresentation(): ?string
     {
-        return $this->présentation;
+        return $this->presentation;
     }
 
-    public function setPrésentation(?string $présentation): static
+    public function setpresentation(?string $presentation): static
     {
-        $this->présentation = $présentation;
+        $this->presentation = $presentation;
 
         return $this;
     }

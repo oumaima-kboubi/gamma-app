@@ -1,11 +1,12 @@
 <?php
 // src/Service/BandService.php
-
 namespace App\Service;
+header("Access-Control-Allow-Origin: *");
 
 use App\Entity\Band;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 class BandService
 {
@@ -15,7 +16,7 @@ class BandService
         $this->doctrine = $doctrine;
     }
 
-    public function create(string $nomGroupe, string $origin, string $ville, float $annéeDébut, float $annéeSéparation, string $fondateurs, int $membres, string $courantMusical, string $présentation)
+    public function create(string $nomGroupe, string $origin, string $ville, float $anneeDebut, float $anneeSeparation, string $fondateurs, int $membres, string $courantMusical, string $presentation)
     {
         $entityManager = $this->doctrine->getManager();
     
@@ -23,12 +24,12 @@ class BandService
         $band->setNomGroupe($nomGroupe);
         $band->setOrigine($origin);
         $band->setVille($ville);
-        $band->setAnnéeDébut($annéeDébut);
-        $band->setAnnéeSéparation($annéeSéparation);
+        $band->setanneeDebut($anneeDebut);
+        $band->setanneeSeparation($anneeSeparation);
         $band->setFondateurs($fondateurs);
         $band->setMembres($membres);
         $band->setCourantMusical($courantMusical);
-        $band->setPrésentation($présentation);
+        $band->setpresentation($presentation);
 
         $entityManager->persist($band);
         $entityManager->flush();
@@ -67,8 +68,39 @@ class BandService
     public function getAll()
     {
         $entityManager = $this->doctrine->getManager();
-        $bands = $entityManager->getRepository(Band::class)->findAll();
-
+        $bandEntities = $entityManager->getRepository(Band::class)->findAll();
+        
+         // Initialize an empty array to hold the band data
+         $bands = [];
+ 
+         // Loop through each band entity and extract the desired properties
+         foreach ($bandEntities as $bandEntity) {
+             $bands[] = [
+                 'id' => $bandEntity->getId(),
+                 'nomGroupe' => $bandEntity->getNomGroupe(),
+                 'origine' => $bandEntity->getOrigine(),
+                 'ville' => $bandEntity->getVille(),
+                 'anneeDebut' => $bandEntity->getanneeDebut(),
+                 'anneeSeparation' => $bandEntity->getanneeSeparation(),
+                 'fondateurs' => $bandEntity->getFondateurs(),
+                 'membres' => $bandEntity->getMembres(),
+                 'courantMusical' => $bandEntity->getCourantMusical(),
+                 'presentation' => $bandEntity->getpresentation(),
+             ];
+         }
+ 
+         // Encode the array as JSON
+         $jsonData = json_encode($bands);
+         
+         // Create a Response object with JSON content type and the encoded data
+         $response = new Response($jsonData);
+         $response->headers->set('Content-Type', 'application/json');
+         
+         // Allow CORS for your Angular app (replace with your actual Angular app URL)
+         $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:4200');
+         
+         return $response;
+        
     }
 
     public function getOne(int $id)

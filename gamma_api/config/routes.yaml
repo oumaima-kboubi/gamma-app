@@ -11,3 +11,7 @@ xlsx:
     path: /upload-excel
     controller: App\Controller\SpreadsheetController::xslx
     methods: ['POST']
+band_all:
+    path: /bands/all
+    controller: App\Controller\BandController::getAll
+    methods: ['GET']

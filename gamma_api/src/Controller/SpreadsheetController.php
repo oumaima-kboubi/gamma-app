@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+header("Access-Control-Allow-Origin: *");
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,13 +58,13 @@ class SpreadsheetController extends AbstractController
                 $nomGroupe = $Row['A'];  
                 $origine = $Row['B']; 
                 $ville= $Row['C'];     
-                $annéeDébut =(float) $Row['D'];
-                $annéeSéparation = (float) $Row['E'];
+                $anneeDebut =(float) $Row['D'];
+                $anneeSeparation = (float) $Row['E'];
                 $fondateurs = $Row['F'];
                 $membres = (int) $Row['G'];
                 $courantMusical = $Row['H'];
-                $présentation = $Row['I'];
-                $this->bandService->create(strval($nomGroupe),strval($origine),strval($ville),$annéeDébut,$annéeSéparation,strval($fondateurs),$membres,strval($courantMusical),strval($présentation));
+                $presentation = $Row['I'];
+                $this->bandService->create(strval($nomGroupe),strval($origine),strval($ville),$anneeDebut,$anneeSeparation,strval($fondateurs),$membres,strval($courantMusical),strval($presentation));
         }
         return $this->json('bands registered', 200); 
 }

@@ -15,6 +15,9 @@ class Band
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    private ?string $nomGroupe = null;
+
+    #[ORM\Column(length: 100)]
     private ?string $origine = null;
 
     #[ORM\Column(length: 100)]
@@ -51,6 +54,18 @@ class Band
     public function setOrigine(string $origine): static
     {
         $this->origine = $origine;
+
+        return $this;
+    }
+
+    public function getNomGroupe(): ?string
+    {
+        return $this->nomGroupe;
+    }
+
+    public function setNomGroupe(string $nomGroupe): static
+    {
+        $this->nomGroupe = $nomGroupe;
 
         return $this;
     }

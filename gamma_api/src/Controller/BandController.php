@@ -3,22 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Band;
+use App\Service\BandService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;
+
 
 
 class BandController extends AbstractController
 {
-    private ManagerRegistry $doctrine;
-    public function __construct(ManagerRegistry $doctrine)
+    private BandService $bandService;
+    public function __construct(BandService $bandService)
     {
-        $this->doctrine = $doctrine;
+        $this->bandService = $bandService;
     }
-
     #[Route('/band', name: 'app_band')]
     public function index(): JsonResponse
     {
@@ -29,22 +27,8 @@ class BandController extends AbstractController
     }
     //dumb function to test the db connection
     #[Route('/bands/create', name: 'band_create')]
-    public function create():JsonResponse
+    public function create(string $nomGroupe, string $origine, string $ville, float $annéeDébut, float $annéeSéparation, string $fondateurs, int $membres, string $courantMusical, string $présentation):JsonResponse
     {
-        $entityManager = $this->doctrine->getManager();
-    
-        $band = new Band();
-        $band->setOrigine('Test Origine');
-        $band->setVille('Test Ville');
-        $band->setAnnéeDébut(2010);
-        $band->setAnnéeSéparation(2020);
-        $band->setFondateurs('Test Fondateurs');
-        $band->setMembres(4);
-        $band->setCourantMusical('Test Courant Musical');
-        $band->setPrésentation('Test Présentation');
-    
-        $entityManager->persist($band);
-        $entityManager->flush();
-        return new JsonResponse(200);
+       return $this->bandService->create($nomGroupe,$origine,$ville,$annéeDébut,$annéeSéparation,$fondateurs,$membres,$courantMusical,$présentation);
     }
 }

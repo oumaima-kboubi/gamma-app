@@ -34,4 +34,52 @@ class BandService
         $entityManager->flush();
         return new JsonResponse(200);
     }
+
+    public function edit(int $id, array $data)
+    {
+        $entityManager = $this->doctrine->getManager();
+        $band = $entityManager->getRepository(Band::class)->find($id);
+
+        if (!$band) {
+            return new JsonResponse('Band not found', 404);
+        }
+
+
+
+        $entityManager->flush();
+        return new JsonResponse('Band updated', 200);
+    }
+    
+    public function delete(int $id)
+    {
+        $entityManager = $this->doctrine->getManager();
+        $band = $entityManager->getRepository(Band::class)->find($id);
+
+        if (!$band) {
+            return new JsonResponse('Band not found', 404);
+        }
+
+        $entityManager->remove($band);
+        $entityManager->flush();
+        return new JsonResponse('Band deleted', 200);
+    }
+    
+    public function getAll()
+    {
+        $entityManager = $this->doctrine->getManager();
+        $bands = $entityManager->getRepository(Band::class)->findAll();
+
+    }
+
+    public function getOne(int $id)
+    {
+        $entityManager = $this->doctrine->getManager();
+        $band = $entityManager->getRepository(Band::class)->find($id);
+
+        if (!$band) {
+            return new JsonResponse('Band not found', 404);
+        }
+
+       
+    }
 }

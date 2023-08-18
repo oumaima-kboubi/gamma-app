@@ -25,8 +25,8 @@ class BandController extends AbstractController
             'path' => 'src/Controller/BandController.php',
         ]);
     }
-    //dumb function to test the db connection
-    #[Route('/bands/create', name: 'band_create')]
+
+    #[Route('/bands/create', name: 'band_create', methods: ["POST","OPTIONS"])]
     public function create(string $nomGroupe, string $origine, string $ville, float $annéeDébut, float $annéeSéparation, string $fondateurs, int $membres, string $courantMusical, string $présentation):JsonResponse
     {
        return $this->bandService->create($nomGroupe,$origine,$ville,$annéeDébut,$annéeSéparation,$fondateurs,$membres,$courantMusical,$présentation);

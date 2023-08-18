@@ -31,7 +31,7 @@ class SpreadsheetController extends AbstractController
         ]);
     }
      
-    #[Route("/upload-excel", name:"xlsx", methods: ["POST"])]
+    #[Route("/upload-excel", name:"xlsx", methods: ["POST","OPTIONS"])]
     public function xslx(Request $request): Response
     {
         // Get the file from the sent request
@@ -53,10 +53,6 @@ class SpreadsheetController extends AbstractController
         // Read data into an array
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true); 
         
-        //show result in postman
-        //dd($sheetData);
-        
-        $entityManager = $this->doctrine->getManager();
         foreach ($sheetData as $Row) 
         { 
                 $nomGroupe = $Row['A'];  
@@ -68,7 +64,6 @@ class SpreadsheetController extends AbstractController
                 $membres = (int) $Row['G'];
                 $courantMusical = $Row['H'];
                 $présentation = $Row['I'];
-                //dd($nomGroupe);
                 $this->bandService->create(strval($nomGroupe),strval($origine),strval($ville),$annéeDébut,$annéeSéparation,strval($fondateurs),$membres,strval($courantMusical),strval($présentation));
         }
         return $this->json('bands registered', 200); 

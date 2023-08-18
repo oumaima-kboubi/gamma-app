@@ -24,6 +24,7 @@
   </label>
   <h4 class="uploaded-file-name" *ngIf="uploadedFileName">Uploaded File: {{ uploadedFileName }}</h4>
   <button class="upload-button" (click)="uploadFile()">Upload</button>
+  <p class="warning-message" *ngIf="showWarning">Please select a valid .xlsx file.</p>
 
 </div>
 

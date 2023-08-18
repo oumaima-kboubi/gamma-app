@@ -37,11 +37,19 @@ export class FileImportComponent implements OnInit {
 
   selectedFile: File | null = null;
   uploadedFileName: string | null = null;
+  showWarning: boolean = false;
 
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-    this.uploadedFileName = event.target.files[0].name;
 
+    if (event.target.files[0] && this.isXlsxFile(event.target.files[0].name)) {
+      this.selectedFile = event.target.files[0];
+      this.uploadedFileName = event.target.files[0].name;
+      this.showWarning = false;
+    }else{
+      this.selectedFile = null;
+      this.uploadedFileName = null;
+      this.showWarning = true;
+    }
   }
 
   uploadFile(): void {
@@ -62,6 +70,11 @@ export class FileImportComponent implements OnInit {
       );
     }
   }
+
+  isXlsxFile(fileName: string): boolean {
+    return fileName.endsWith('.xlsx');
+  }
+
 }
 
 

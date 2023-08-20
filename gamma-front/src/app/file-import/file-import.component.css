@@ -41,3 +41,20 @@
   padding: 5px; /* Add some padding for better visibility */
   margin-top: 5px;
 }
+
+.top-right-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.navigate-button {
+  background-color: #14b832;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}

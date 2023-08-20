@@ -15,3 +15,15 @@ band_all:
     path: /bands/all
     controller: App\Controller\BandController::getAll
     methods: ['GET']
+band_getOne:
+    path: /bands/getOne/{id}
+    controller: App\Controller\BandController::getBandById
+    methods: ['GET']
+band_update:
+    path: /bands/update/{id}
+    controller: App\Controller\BandController::update
+    methods: ['POST']
+band_delete:
+    path: /bands/delete/{id}
+    controller: App\Controller\BandController::delete
+    methods: ['DELETE']

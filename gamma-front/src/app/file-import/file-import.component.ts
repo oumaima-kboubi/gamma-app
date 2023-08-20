@@ -5,26 +5,23 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-file-import',
   templateUrl: './file-import.component.html',
-  styleUrls: ['./file-import.component.css']
+  styleUrls: ['./file-import.component.css'],
 })
 export class FileImportComponent implements OnInit {
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private http: HttpClient,private router: Router) {}
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   selectedFile: File | null = null;
   uploadedFileName: string | null = null;
   showWarning: boolean = false;
 
   onFileSelected(event: any): void {
-
     if (event.target.files[0] && this.isXlsxFile(event.target.files[0].name)) {
       this.selectedFile = event.target.files[0];
       this.uploadedFileName = event.target.files[0].name;
       this.showWarning = false;
-    }else{
+    } else {
       this.selectedFile = null;
       this.uploadedFileName = null;
       this.showWarning = true;
@@ -54,6 +51,7 @@ export class FileImportComponent implements OnInit {
     return fileName.endsWith('.xlsx');
   }
 
+  navigateToList() {
+    this.router.navigate(['/bands']);
+  }
 }
-
-

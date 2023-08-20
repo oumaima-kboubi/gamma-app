@@ -6,18 +6,22 @@ import { BackgroundPageComponent } from './background-page/background-page.compo
 import { FileImportComponent } from './file-import/file-import.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BandListComponent } from './band-list/band-list.component';
+import { BandEditComponent } from './band-edit/band-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundPageComponent,
     FileImportComponent,
-    BandListComponent
+    BandListComponent,
+    BandEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

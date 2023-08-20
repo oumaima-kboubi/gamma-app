@@ -7,6 +7,7 @@ use App\Service\BandService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
@@ -34,8 +35,30 @@ class BandController extends AbstractController
     #[Route('/bands/all', name: 'band_all', methods: ["GET","OPTIONS"])]
     public function getAll()
     {
-        //dd($this->bandService->getAll());
        $bands= $this->bandService->getAll();
        return $bands;
+    }
+    #[Route('/bands/getOne/{id}', name: 'band_getOne', methods: ["GET","OPTIONS"])]
+    public function getBandById($id)
+    {
+        $bands= $this->bandService->getBandById($id);
+        return $bands;
+    }
+    #[Route('/bands/update/{id}', name: 'band_update', methods: ["POST","OPTIONS"])]
+    public function update(Request $request,$id)
+    {
+        $bands= $this->bandService->update( $request,$id);
+        return $bands;
+    }
+    #[Route('/bands/delete/{id}', name: 'band_delete', methods: ["DELETE"])]
+    public function delete(int $id)
+    {
+        $deleted = $this->bandService->delete($id);
+
+        if (!$deleted) {
+            return new JsonResponse('Band not found', 404);
+        }
+
+        return new JsonResponse('Band deleted successfully', 200);
     }
 }
